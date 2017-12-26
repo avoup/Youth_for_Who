@@ -19,61 +19,65 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/resp.css">
 
+    <script defer src="assets/plugins/fontawesome-all.js"></script>
+
 </head>
 <body>
 
 <div class="spacer"></div>
 
 <div class="frame">
-  <!-- <div class="main-bg">
-  </div> -->
+
   <nav>
       <div class="menu">
         <div class="logo">Youth For Who</div>
+        <div class="menu_open"><div></div></div>
         <div class="pages">
-          <div class="active menu_btn">მთავარი</div>
-          <div class="menu_btn">გუნდი</div>
-          <div class="menu_btn">პროექტები</div>
-          <div class="menu_btn">სიახლეები</div>
-          <div class="menu_btn">კონტაქტი</div>
+          <div data-name="main" class="active menu_btn main_btn">მთავარი</div>
+          <div data-name="team" class="menu_btn team_btn">გუნდი</div>
+          <div data-name="projects" class="menu_btn projects_btn">პროექტები</div>
+          <div data-name="news" class="menu_btn news_btn">სიახლეები</div>
+          <div data-name="contact" class="menu_btn contact_btn">კონტაქტი</div>
         </div>
       </div>
   </nav>
 
-  <div class="main">
-    <img src="assets/img/bg.jpg">
-    <h2>ჩვენ ვზრუნავთ თქვენს ჯანმრთელობაზე</h3>
-  </div>
+<section id="main">
+    <div class="image_bg">
+      <img src="assets/img/bg.jpg">
+      <h2>ჩვენ ვზრუნავთ თქვენს ჯანმრთელობაზე</h3>
+    </div>
 
 
-  <div class="container-fluid panels">
-  <div class="row">
-    <div class=" col-xs-6 col-sm-4">
-      <div class="panel">
-        <div class="visual"></div>
-        <div class="text">
-          <div class="arrow" id="for_panel"></div>
+    <div class="container-fluid panels">
+    <div class="row">
+      <div class=" col-xs-6 col-sm-4">
+        <div class="panel">
+          <div class="visual"></div>
+          <div class="text">
+            <div class="arrow arrow_sm"></div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class=" col-xs-6 col-sm-4">
-      <div class="panel">
-        <div class="visual"></div>
-        <div class="text">
-          <div class="arrow" id="for_panel"></div>
+      <div class=" col-xs-6 col-sm-4">
+        <div class="panel">
+          <div class="visual"></div>
+          <div class="text">
+            <div class="arrow arrow_sm"></div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class=" col-xs-6 col-sm-4">
-      <div class="panel">
-        <div class="visual"></div>
-        <div class="text">
-          <div class="arrow" id="for_panel"></div>
+      <div class=" col-xs-6 col-sm-4">
+        <div class="panel">
+          <div class="visual"></div>
+          <div class="text">
+            <div class="arrow arrow_sm"></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
   <div class="container-fluid bg">
     <section id="team">
@@ -127,48 +131,189 @@
     </section>
 
     <section id="projects">
-      <div class="projects_head text">
+      <div class="separator text">
         <h2>ჩვენს მიერ განხორციელებული პროექტები</h2>
         <h6>პროექტები რომლებიც გათვლილია თქვენზე</h6>
       </div>
 
-      <div class="project">
-        <div class="row">
+        <div class="row" style="margin-top: -10px;">
           <div class="col-xs-6 col-md-4 project_block">
             <img src="assets/img/upload/projects/img_1.jpg" class="img-responsive">
+            <h3 class="centered">აბლაბუდა</h3>
           </div>
           <div class="col-xs-6 col-md-4 project_block">
             <img src="assets/img/upload/projects/img_2.jpg" class="img-responsive">
+            <h3 class="centered">აბლაბუდა</h3>
           </div>
           <div class="col-xs-6 col-md-4 project_block">
-            <h6>აბლაბუდა</h6>
             <img src="assets/img/upload/projects/img_3.jpg" class="img-responsive">
+            <h3 class="centered">აბლაბუდა</h3>
           </div>
           <div class="col-xs-6 col-md-4 project_block">
             <img src="assets/img/upload/projects/img_4.jpg" class="img-responsive">
+            <h3 class="centered">აბლაბუდა</h3>
           </div>
           <div class="col-xs-6 col-md-4 project_block">
             <img src="assets/img/upload/projects/img_5.jpg" class="img-responsive">
+            <h3 class="centered">აბლაბუდა</h3>
           </div>
           <div class="col-xs-6 col-md-4 project_block">
             <img src="assets/img/upload/projects/img_6.jpg" class="img-responsive">
+            <h3 class="centered">აბლაბუდა</h3>
           </div>
           <div class="col-xs-6 col-md-4 project_block">
             <img src="assets/img/upload/projects/img_7.jpg" class="img-responsive">
+            <h3 class="centered">აბლაბუდა</h3>
           </div>
           <div class="col-xs-6 col-md-4 project_block" id="more_projects">
             <h3>ყველა პროექტის ნახვა</h3>
-            <div class="arrow"></div>
+            <div class="arrow arrow_bg"></div>
           </div>
           <div class="col-xs-6 col-md-4 project_block">
             <img src="assets/img/upload/projects/img_8.jpg" class="img-responsive">
+            <h3 class="centered">აბლაბუდა</h3>
+          </div>
+        </div>
+
+      <div class="separator black"></div>
+    </section>
+    <section id="news">
+      <br>
+      <h2>სიახლეები</h2>
+
+      <div class="row text-center">
+        <div class="col-md-6">
+          <div class="col-md-12">
+            <div class="news-container">
+              <div class="news-img"></div>
+              <h4>სიახლე სიახლე სიახლე</h4>
+              <h6>23 დეკემბერი 17 კომენტარი</h6>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+              </p>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="news-container">
+              <div class="news-img"></div>
+              <h4>სიახლე სიახლე სიახლე</h4>
+              <h6>23 დეკემბერი 17 კომენტარი</h6>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+              </p>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="news-container">
+              <div class="news-img"></div>
+              <h4>სიახლე სიახლე სიახლე</h4>
+              <h6>23 დეკემბერი 17 კომენტარი</h6>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="col-md-12">
+            <div class="news-container">
+              <div class="news-img"></div>
+              <h4>სიახლე სიახლე სიახლე</h4>
+              <h6>23 დეკემბერი 17 კომენტარი</h6>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+              </p>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="news-container">
+              <div class="news-img"></div>
+              <h4>სიახლე სიახლე სიახლე</h4>
+              <h6>23 დეკემბერი 17 კომენტარი</h6>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+              </p>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="news-container">
+              <div class="news-img"></div>
+              <h4>სიახლე სიახლე სიახლე</h4>
+              <h6>23 დეკემბერი 17 კომენტარი</h6>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+              </p>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="end"></div>
+      <div class="separator">
+        <h2>ყველა სიახლე</h2>
+        <div class="arrow arrow_md"></div>
+      </div>
     </section>
+    <section id="contact">
+      <div class="separator black">
+        <h2>კონტაქტი</h2>
+        <div class="arrow arrow_md"></div>
+      </div>
 
+
+          <div class="row contact black">
+            <div class="col-md-8">
+          <form id="contact-form" method="post" action="" role="form">
+
+              <div class="messages"></div>
+
+              <div class="controls">
+
+                  <div class="row">
+                      <div class="col-md-6">
+                          <div class="form-group">
+                              <input id="form_name" type="text" name="name" class="form-control" placeholder="სახელი *" required="required" data-error="სახელის ჩაწერა აუცილებელია.">
+                              <div class="help-block with-errors"></div>
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <input id="form_email" type="email" name="email" class="form-control" placeholder="email *" required="required" data-error="email არასწორია.">
+                          <div class="help-block with-errors"></div>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input id="form_subject" type="text" name="subject" class="form-control" placeholder="სათაური *" required="required" data-error="სათაურის ჩაწერა აუცილებელია.">
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-12">
+                          <div class="form-group">
+                              <textarea id="form_message" name="message" class="form-control" placeholder="წერილი *" rows="4" required="required" data-error="მოგვწერეთ წერილი."></textarea>
+                              <div class="help-block with-errors"></div>
+                          </div>
+                      </div>
+                      <div class="col-md-12">
+                          <input type="submit" class="send" value="გაგზავნა">
+                      </div>
+                  </div>
+              </div>
+
+          </form>
+        </div>
+        <div class="col-md-4 cont">
+          <ul>
+            <li><i class="fas fa-user"></i> 5512 Lorem Ipsum Vestibulum 666/13</li>
+            <li><i class="fas fa-phone"></i> +1 800 789 50 12, +1 800 450 6935</li>
+            <li><a href="#"><i class="fa fa-envelope"></i> mail@compname.com</a></li>
+            <li><i class="fab fa-skype"></i> compname</li>
+            <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+            <li><a href="#"><i class="fab fa-facebook-square"></i> Facebook</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <div class="footer text-center">
+      <p>შპს მედსპაიდერი <i class="far fa-copyright"></i> ყველა უფლება დაცულია</p>
+    </div>
     </div>   <!-- bg -->
   </div>   <!-- frame -->
 
