@@ -115,7 +115,6 @@ p {
 /*  menu  */
 
 .menu {
-  overflow: hidden;
   text-align: center;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
