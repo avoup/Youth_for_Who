@@ -1,0 +1,105 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+if(isset($_SESSION['id11']))
+  header('Location: ../index.php');
+?>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="views/style/style.css">
+</head>
+<body>
+
+  <ul id="navbar" class="topnav">
+    <li onclick="document.getElementById('id02').style.display='block'"><a href="#">Register</a></li>
+    <li onclick="document.getElementById('id01').style.display='block'"><a href="#">Login</a></li>
+
+  </ul>
+<!-- LOGIN -->
+<!-- <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button> -->
+
+<div id="id01" class="modal">
+
+  <form class="modal-content animate" action="index.php" method="post">
+
+
+    <div class="container">
+      <label><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="username" required>
+
+      <label><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="password" required>
+
+      <button type="submit">Login</button>
+      <input type="checkbox" name="stayloggedin">Stay Logged In
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+
+    </div>
+  </form>
+</div>
+
+<!-- REGISTER -->
+<!-- <button onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Register</button> -->
+
+<div id="id02" class="modal">
+
+  <form id="vform" class="modal-content animate" action="">
+
+
+    <div id="submitted" class="container">
+
+      <div id="usercheck">
+        <label class="labels" for="username"><b>Username</b></label>
+        <input id="username" type="text" minlength="2" placeholder="Enter Username" name="username" required>
+        <img src="views/assets/ajax-loader.gif" id="loadergif">
+        <img src="views/assets/loadertick.ico" id="loadertick">
+        <img src="views/assets/loaderX.png" id="loaderX">
+        <label class="error" for="username" id="username_error">This field is required.</label>
+      </div>
+
+      <div id="emailcheck">
+        <label class="labels"><b>Email</b></label>
+        <input id="email" type="text" placeholder="Enter Email" name="email" value="asdf@asdf.ge" required>
+        <img src="views/assets/ajax-loader.gif" id="loadergifE">
+        <img src="views/assets/loadertick.ico" id="loadertickE">
+        <img src="views/assets/loaderX.png" id="loaderXE">
+        <label class="error" for="email" id="email_error">This field is required.</label>
+      </div>
+
+      <label class="labels"><b>Password</b></label>
+      <input id="password" type="password" placeholder="Enter Password" name="password" value="1234" required>
+      <label class="error" for="password" id="password_error">This field is required.</label>
+
+      <label class="labels"><b>Repeat Password</b></label>
+      <input id="repeated_password" type="password" placeholder="Repeat Password" name="repeated_password"  value="1234" required>
+      <label class="error" for="repeated_password" id="repeated_password_error">This field is required.</label>
+
+      <label class="labels"><b>City</b></label>
+      <input id="cityid" type="text" placeholder="Enter City" name="cityid" value="1" required>
+      <label class="error" for="cityid" id="cityid_error">This field is required.</label>
+
+      <button type="submit" name="register" class="button">Register</button>
+      <div id="errorplace"></div>
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+    </div>
+  </form>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script> -->
+<!-- <script src="views/js/validation.js"></script> -->
+<script src="views/js/js.js"></script>
+<script src="views/js/ajax.js"></script>
+
+</body>
+</html>

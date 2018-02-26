@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="style/style.css">
+</head>
+<body>
+
+<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Register</button>
+
+<div id="id01" class="modal">
+
+  <form class="modal-content animate" action="../index.php" method="post">
+
+
+    <div class="container">
+      <label><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="username" required>
+
+      <label><b>Email</b></label>
+      <input type="text" placeholder="Enter Email" name="email" required>
+
+      <label><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="password" required>
+
+      <label><b>Repeat Password</b></label>
+      <input type="password" placeholder="Repeat Password" name="repeated_password" required>
+
+      <label><b>City</b></label>
+      <input type="text" placeholder="Enter City" name="cityid" required>
+
+      <button type="submit" name="register">Register</button>
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+
+    </div>
+  </form>
+</div>
+<script src="js/js.js"></script>
+
+</body>
+</html>

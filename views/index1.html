@@ -1,0 +1,23 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+if(!isset($_SESSION['id11']))
+	header('Location: ../index.php');
+?>
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Logged in as:</p>
+<?php echo $_SESSION['id11']?>
+
+<form action="index.php">
+</br>
+<button type="submit" name="logout" value="1">Log out</button>
+
+</form>
+</body>
+</html>
