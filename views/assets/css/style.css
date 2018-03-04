@@ -68,7 +68,6 @@ a:hover {
 .separator {
   min-height: 150px;
   padding-top: 40px;
-  /* margin-bottom: -10px; */
   background-color: var(--main-blue);
 }
 .separator h2,
@@ -428,6 +427,10 @@ a:hover {
 }
 /* news section */
 
+#news .col-md-12 {
+  max-width: 50%;
+  margin-bottom: 14px;
+}
 .news-img {
   height: 380px;
   background-color: #f9f9f9;
@@ -443,7 +446,7 @@ a:hover {
   z-index: 5;
   width: 100%;
   left: 0;
-  height: 11px;
+  height: 14px;
   bottom: -6px;
 }
 .news-container::after {

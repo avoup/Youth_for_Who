@@ -21,6 +21,9 @@
     padding-left: 0;
     padding-right: 0;
   }
+  #news .col-md-12 {
+    max-width: 100%;
+  }
 }
 @media (min-width: 768px){
 

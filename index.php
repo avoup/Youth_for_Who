@@ -21,9 +21,7 @@ if(isset($_REQUEST['register'])) {
 }
 //session_destroy();
 
-if(isset($_SESSION['id11']))
+
 	include('views/index.html');
-else if(isset($_REQUEST['register']))
-	include('views/register.html');
-else include('views/index.html');
+
 ?>

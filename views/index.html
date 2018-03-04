@@ -7,8 +7,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes"/>
-    <meta name="description" content="სიმპტომების შემოწმება ონლაინში, ვებ კონსულტაცია">
-    <meta name="keywords" content="სიმპტომები, შემოწმება, ონლაინ, ვებ, კონსულტაცია">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
     <meta name="author" content="MadSpider">
     <!-- <link rel="shortcut icon" href="icon.ico"> -->
     <!-- <link href='views/assets/css/fonts/font.css' rel='stylesheet' type='text/css'> -->
@@ -95,8 +95,8 @@
     <section id="team">
       <h2>ვინ ვართ ჩვენ? გაიცანით ჩვენი გუნდი</h2>
 
-      <div class="row members">
-        <div class="col-xs-6 col-sm-4">
+      <div class="row members" id="tTeam">
+        <!-- <div class="col-xs-6 col-sm-4">
           <div class="member">
             <div class="visual"><img src="views/assets/img/upload/profile.jpg" class="img-responsive" width="200"></div>
             <div class="text">
@@ -131,14 +131,11 @@
                 აქ ვერ მოხერხდება სამწუხაროდ.</p>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
 
-      <div class="goal text">
-        <h4>ჩვენი მიზანი</h4><br>
-        <p>ჯანდაცვა (ჯანმრთელობის დაცვა) არის სახელმწიფო, სოციალ–ეკონომიკურ, სამედიცინო და საზოგადოებრივ ღონისძიებათა სისტემა, რომლის მიზანია ადამიანთა ჯანმრთელობის დაცვა, დაავადებების თავიდან აცილება და მკურნალობა, სიცოცხლის გახანგრძლივება. ჯანდაცვა ზოგიერთ ქვეყანაში ეფუძნება უფასო სამედიცინო დახმარების და მედიცინის პროფილაქტიკური ღონისძიებების მიმართულებებს, სხვაგან - სახელმწიფოს მხრიდან იგი რეგლამენტირებულია ანტიეპიდემიური სამუშაოების ჩატარებით, ხოლო ძირითადი მომსახურება გადატანილია კერძო სექტორში.</p>
-        <p>ჯანმრთელობის დაცვის მეთოდები, ინდივიდუალური და კომპლექსური პროფილაქტიკული ღონისძიებები , ბიოსფეროზე მეთვალყურეობისა და კონტროლის ხერხები, დაავადებათა დიაგნოსტიკისა და მკურნალობის მეთოდები ინტერნაციონალურია, მაგრამ ყოველი ქვეყნისათვის დამახასიათებელია ეროვნული თავისებურებები და ტრადიციები.</p>
-        <p>ჯანდაცვის სრულფასოვნად განხორციელებისათვის აუცილებელია ძვირადღირებული მატერიალურ-ტექნიკური ბაზა, საავადმყოფოების და ამბულატორულ-პოლიკლინიკური დაწესებულებების (პოლიკლინიკა, დისპანსერი, პროფილაქტორიუმი) ფართო ქსელი, სანიტარულ-ეპიდემიოლოგიური, დედათა და ბავშვთა დაცვის სამსახურები.</p>
+      <div class="goal text" id="tAbout">
+      
       </div>
     </section>
 
@@ -148,8 +145,8 @@
         <h6>პროექტები რომლებიც გათვლილია თქვენზე</h6>
       </div>
 
-        <div class="row" style="margin-top: -10px;">
-          <div class="col-xs-6 col-md-4 project_block">
+        <div class="row" id="tProjects" style="margin-top: -10px;">
+          <!-- <div class="col-xs-6 col-md-4 project_block">
             <img src="views/assets/img/upload/projects/img_1.jpg" class="img-responsive">
             <h3 class="centered">აბლაბუდა</h3>
           </div>
@@ -184,7 +181,7 @@
           <div class="col-xs-6 col-md-4 project_block">
             <img src="views/assets/img/upload/projects/img_8.jpg" class="img-responsive">
             <h3 class="centered">აბლაბუდა</h3>
-          </div>
+          </div> -->
         </div>
 
       <div class="separator black"></div>
@@ -193,9 +190,8 @@
       <br>
       <h2>სიახლეები</h2>
 
-      <div class="row text-center">
-        <div class="col-md-6">
-          <div class="col-md-12">
+      <div class="row text-center" id="tNews">
+          <!-- <div class="col-md-12">
             <div class="news-container">
               <div class="news-img"></div>
               <h4>სიახლე სიახლე სიახლე</h4>
@@ -222,8 +218,6 @@
               </p>
             </div>
           </div>
-        </div>
-        <div class="col-md-6">
           <div class="col-md-12">
             <div class="news-container">
               <div class="news-img"></div>
@@ -250,8 +244,7 @@
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
               </p>
             </div>
-          </div>
-        </div>
+          </div> -->
       </div>
 
       <div class="separator">
@@ -338,6 +331,7 @@
 <script type="text/javascript" src="views/assets/plugins/jquery-3.2.1.min.js"></script>
 <!-- <script type="text/javascript" src="views/assets/plugins/bootstrap/js/bootstrap.min.js"></script> -->
 <script type="text/javascript" src="views/assets/js/main.js"></script>
+<script type="text/javascript" src="views/assets/js/request.js"></script>
 
 </body>
 </html>

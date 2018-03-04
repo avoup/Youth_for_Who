@@ -1,0 +1,53 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+if(!isset($_SESSION['id11']))
+	header('Location: ../admin.php');
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="assets/css/admin_panel.css">
+  <script defer src="assets/plugins/fontawesome-all.js"></script>
+</head>
+<body>
+
+<div class="sidenav">
+
+  <button class="dropdown-btn">Editor
+  <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <button class="btn" id="team">team</button>
+    <button class="btn" id="about">about us</button>
+    <button class="btn" id="projects">projects</button>
+    <button class="btn" id="news">news</button>
+  </div>
+</div>
+
+<div class="target"></div>
+<!-- <div class="panel team"></div> -->
+
+<script>
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.height === "141px") {
+      dropdownContent.style.height = "0";
+    } else {
+      dropdownContent.style.height = "141px";
+    }
+  });
+}
+</script>
+<script type="text/javascript" src="assets/plugins/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="assets/js/admin.js"></script>
+</body>
+</html>
