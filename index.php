@@ -19,7 +19,7 @@ if(isset($_REQUEST['register'])) {
 } else {
     $userControler->login();
 }
-session_destroy();
+//session_destroy();
 
 if(isset($_REQUEST['adminpage'])) {
     include('views/admin.html');
