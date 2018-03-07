@@ -19,9 +19,14 @@ if(isset($_REQUEST['register'])) {
 } else {
     $userControler->login();
 }
-//session_destroy();
+session_destroy();
 
-
-	include('views/index.html');
+if(isset($_REQUEST['adminpage'])) {
+    include('views/admin.html');
+} else if(isset($_REQUEST['register'])) {
+    include('views/register.html');
+} else if(isset($_SESSION['id11'])) {
+    include('views/index.html');
+} else include('views/login.html');
 
 ?>
