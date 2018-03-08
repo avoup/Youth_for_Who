@@ -30,21 +30,26 @@ $(document).ready(function(){
                 var id = "tProjects";
                 var stuff = "<div class='col-xs-6 col-md-4 project_block'>"
                       + "<img src='" + field.img + "' class='img-responsive'>"
-                      + "<h3 class='centered'>" + field.Name + "</h3></div>";
+                      + "<h3 class='centered'>" + field.Name + "</h3>"
+                      + "<p>" + field.description + "</p>"
+                      +"</div>";
                 break;
               case "news":
+                var desc = field.description;
                 var id = "tNews";
                 var stuff = "<div class='col-md-12'>"
                       + "<div class='news-container'>"
                       + "<div class='news-img'></div>"
                       + "<h4>" + field.Name + "</h4>"
                       + "<h6>" + field.status + "</h6>"
-                      + "<p>" + field.description + "</p>"
+                      + "<span class='more'>" + desc + "</span>"
                       + "</div></div>";
             }
 
               var target = $("#" + id).append(stuff);
           });        // each
+          showToggle();
+          showModal();
         }          // success
       });        // ajax
     })(j);

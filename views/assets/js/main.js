@@ -1,3 +1,71 @@
+function showToggle() {
+    // Configure/customize these variables.
+    var showChar = 100;  // How many characters are shown by default
+    var ellipsestext = "...";
+    var moretext = "Show more >";
+    var lesstext = "Show less";
+
+
+    $('.more').each(function() {
+        var content = $(this).html();
+
+        if(content.length > showChar) {
+
+            var c = content.substr(0, showChar);
+            var h = content.substr(showChar, content.length - showChar);
+            var html = c + '<span class="moreellipses">'
+                     + ellipsestext + '&nbsp;</span><span class="morecontent"><span>'
+                     + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">'
+                     + moretext + '</a></span>';
+            $(this).html(html);
+        }
+
+    });
+
+    $(".morelink").click(function(){
+        if($(this).hasClass("less")) {
+            $(this).removeClass("less");
+            $(this).html(moretext);
+        } else {
+            $(this).addClass("less");
+            $(this).html(lesstext);
+        }
+        $(this).parent().prev().toggle();
+        $(this).prev().toggle();
+        return false;
+    });
+}
+
+
+
+function showModal() {
+    var modal = document.getElementById('myModal');
+
+    var proj = $('.project_block');
+    var modalImg = document.getElementById("img01");
+    var modalTitle = document.getElementById("title");
+    var modalDesc = document.getElementById("desc");
+
+    proj.click(function(){
+        modal.style.display = "block";
+        modalImg.src = $(this).find('img').attr('src');
+        modalTitle.innerHTML = $(this).find('h3').html();
+        modalDesc.innerHTML = $(this).find('p').html();
+    })
+
+    var span = document.getElementsByClassName("close")[0];
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+    window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+  }
+}
+// aaaaaaaaaaaaaaaaa
+
 $(document).ready(function(){
 
   $('.menu')
