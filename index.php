@@ -25,8 +25,8 @@ if(isset($_REQUEST['adminpage'])) {
     include('views/admin.html');
 } else if(isset($_REQUEST['register'])) {
     include('views/register.html');
-} else if(isset($_SESSION['id11'])) {
-    include('views/index.html');
-} else include('views/login.html');
+} else if(isset($_REQUEST['login'])) {
+    include('views/login.html');
+} else include('views/index.html');
 
 ?>
