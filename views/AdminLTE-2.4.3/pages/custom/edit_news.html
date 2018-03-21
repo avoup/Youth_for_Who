@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 <head>
   <meta charset="utf-8">
@@ -13,9 +14,7 @@
   <link rel="stylesheet" href="views/AdminLTE-2.4.3/bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="views/AdminLTE-2.4.3/dist/css/AdminLTE.min.css">
-  <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
-        page. However, you can choose any other skin. Make sure you
-        apply the skin class to the body tag so the changes take effect. -->
+
   <link rel="stylesheet" href="views/AdminLTE-2.4.3/dist/css/skins/skin-purple.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -29,9 +28,8 @@
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-
 <body class="hold-transition skin-purple sidebar-mini">
-<div class="wrapper">
+<div class="wrapper" id="edit">
 
   <!-- Main Header -->
   <header class="main-header">
@@ -70,18 +68,18 @@
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MENU</li>
-        <li class="treeview active">
+        <li class="treeview">
           <a href="#"><i class="fa fa-edit"></i> <span>Add/edit Projects</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="admin.php?view=add"><i class="fa fa-circle-o"></i>Add</a></li>
+            <li><a href="admin.php?view=add"><i class="fa fa-circle-o"></i>Add</a></li>
             <li><a href="admin.php?view=edit"><i class="fa fa-circle-o"></i>Edit</a></li>
           </ul>
         </li>
-        <li class="treeview">
+        <li class="treeview active">
           <a href="#"><i class="fa fa-edit"></i> <span>Add/edit News</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -89,7 +87,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="admin.php?view=add_news"><i class="fa fa-circle-o"></i>Add</a></li>
-            <li><a href="admin.php?view=edit_news"><i class="fa fa-circle-o"></i>Edit</a></li>
+            <li class="active"><a href="admin.php?view=edit_news"><i class="fa fa-circle-o"></i>Edit</a></li>
           </ul>
         </li>
         <li><a href="admin.php?view=edit_about"><i class="fa fa-table"></i> <span>Edit about us</span></a></li>
@@ -99,12 +97,11 @@
     <!-- /.sidebar -->
   </aside>
 
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Add/Edit Projects
+        Add/Edit news
       </h1>
 
     </section>
@@ -114,37 +111,26 @@
 
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Add new project</h3>
+          <h3 class="box-title">Edit news</h3>
+        </div>
+        <div class="box-body">
+          <table id="project-table" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+              <th class="sr-only">id</th>
+              <th>სათაური</th>
+              <th>დამატების თარიღი</th>
+              <th>აღწერა</th>
+              <th>რედაქტირება</th>
+              <th>წაშლა</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
         </div>
 
-        <form class="form-add" role="form" method="post" action="loader.php">
-          <div class="box-body">
-
-            <div class="form-group">
-              <label for="titleInput">Title</label>
-              <input type="text" name="name" class="form-control" id="titleInput" placeholder="title ...">
-            </div>
-
-            <div class="form-group">
-              <label for="imgInput">Cover image</label>
-              <input type="file" name="img" id="imgInput">
-              <p class="help-block">only 4:3 resolution images</p>
-            </div>
-
-            <div class="form-group">
-              <label for="editor1">Description</label>
-              <textarea name="full_desc" id="editor1" rows="10" cols="80"></textarea>
-            </div>
-
-            <div class="callout callout-danger error-box" style="display:none"></div>
-            <div class="callout callout-success success-box" style="display:none"></div>
-          </div>
-          <div class="box-footer">
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </div>
-        </form>
       </div>
-
 
     </section>
     <!-- /.content -->
@@ -157,6 +143,110 @@
     <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
   </footer>
 
+<!-- ======== modal -->
+<div class="modal fade" id="edit-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Update News</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-add" role="form" method="post" action="loader.php">
+          <div class="box-body">
+            <input type="text" name="project_id" id="idInput" style="display:none">
+            <input type="text" name="cover_img_id" id="coverImgIdInput" style="display:none">
+            <input type="text" name="main_img_id" id="mainImgIdInput" style="display:none">
+            <div class="form-group">
+              <label for="titleInput">Title</label>
+              <input type="text" name="name" class="form-control" id="titleInput" placeholder="title ...">
+            </div>
+
+            <div class="form-group">
+              <label for="descriptionInput">Short description</label>
+              <input type="text" name="desc" class="form-control" id="descriptionInput" placeholder="short description ...">
+            </div>
+
+            <div class="form-group">
+              <label for="imgInput">Cover image</label>
+              <input type="file" name="img" id="imgInput">
+              <p class="help-block">only 4:3 resolution images</p>
+            </div>
+  <!-- ========== main img === -->
+            <div class="form-group">
+              <label for="imgInput_main">Main image</label>
+              <input type="file" name="img" id="imgInput_main">
+              <p class="help-block">only 16:9 resolution images</p>
+            </div>
+
+            <div class="form-group">
+              <label for="editor1">Description</label>
+              <textarea name="full_desc" id="editor1" rows="10" cols="80"></textarea>
+            </div>
+            <div class="radio">
+              <label><input type="radio" name="status" value="1" checked>მიმდინარე</label>
+              <label><input type="radio" name="status" value="2">დასრულებული</label>
+            </div>
+
+            <div class="callout callout-danger error-box" style="display:none"></div>
+          </div>
+          <div class="box-footer">
+            <div class="callout callout-danger error-box" style="display:none"></div>
+            <div class="callout callout-success success-box" style="display:none"></div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<div class="modal modal-danger fade" id="modal-danger">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Warning</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="yesButton" class="btn btn-outline pull-left" data-dismiss="modal">Yes</button>
+        <button type="button" class="btn btn-outline" data-dismiss="modal">No</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<div class="modal modal-success fade" id="modal-success">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Success</h4>
+      </div>
+      <div class="modal-body">
+        <p>News Deleted!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" onclick="window.location.reload()">OK</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal-warning -->
 </div>
 <!-- ./wrapper -->
 
@@ -164,16 +254,22 @@
 <script src="views/AdminLTE-2.4.3/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="views/AdminLTE-2.4.3/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script src="views/AdminLTE-2.4.3/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="views/AdminLTE-2.4.3/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="views/AdminLTE-2.4.3/dist/js/adminlte.min.js"></script>
 
 <script src="views/AdminLTE-2.4.3/bower_components/ckeditor/ckeditor.js"></script>
 
+<script src="views/AdminLTE-2.4.3/dist/js/edit.js"></script>
+
 <script src="views/AdminLTE-2.4.3/dist/js/push.js"></script>
 
 <script>
   $(function () {
-    CKEDITOR.replace('editor1')
+      $('#project-table').drawTable("P");
+      CKEDITOR.replace('editor1');
   })
 </script>
 

@@ -10,13 +10,11 @@ $.fn.drawTable = function(n){
       var id = $(this).parent().siblings(".getId").html();
       var url = "loader.php?a=ProjectsController.Projects.getProjectById&id=" + id;
       $.getJSON(url, function(result){
-        // console.log(result.response.desc);
         $("#idInput").val(id)
         $("#titleInput").val(result.response.name);
         $("#descriptionInput").val(result.response.description);
         $("#coverImgIdInput").val(result.response.cover_img_id);
         $("#mainImgIdInput").val(result.response.main_imgs[0].attach_id);
-        // $("#imgInput").val(result.response.files);
         CKEDITOR.instances.editor1.setData(result.response.full_desc);
       });
     });
@@ -30,7 +28,6 @@ $.fn.drawTable = function(n){
     success:function(data, textStatus, jqXHR){
       $.each(data.response, function(i, field){
 
-        if (n=="P"){
           var html = "<tr>"
           + "<td class='sr-only getId'>" + field.id + "</td>"
           + "<td>" + field.name + "</td>"
@@ -39,17 +36,8 @@ $.fn.drawTable = function(n){
           + "<td>" + "<button class='btn btn-default getProject' data-toggle='modal' data-target='#edit-modal'><i class='fa fa-edit'></i></button>" + "</td>"
           + "<td>" + "<button class='btn btn-default deleteProj' data-toggle='confirmation' data-title='are you serious?'><i class='fa fa-close'></i></button>" + "</td>"
           + "</tr>";
-        } else {
-          var html = "<tr>"
-          + "<td class='sr-only getId'>" + field.id + "</td>"
-          + "<td>" + field.name + "</td>"
-          + "<td></td>"
-          + "<td>" + field.description + "</td>"
-          + "</tr>";
-        };
 
         $("tbody", obj).append(html);
-        // console.log(field);
       });
 
       $(obj).DataTable({

@@ -13,7 +13,9 @@
   <link rel="stylesheet" href="views/AdminLTE-2.4.3/bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="views/AdminLTE-2.4.3/dist/css/AdminLTE.min.css">
-
+  <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+        page. However, you can choose any other skin. Make sure you
+        apply the skin class to the body tag so the changes take effect. -->
   <link rel="stylesheet" href="views/AdminLTE-2.4.3/dist/css/skins/skin-purple.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -79,18 +81,30 @@
             <li><a href="admin.php?view=edit"><i class="fa fa-circle-o"></i>Edit</a></li>
           </ul>
         </li>
-        <li class="active"><a href="admin.php?view=logs"><i class="fa fa-table"></i> <span>Transactions log</span></a></li>
+        <li class="treeview active">
+          <a href="#"><i class="fa fa-edit"></i> <span>Add/edit News</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="active"><a href="admin.php?view=add_news"><i class="fa fa-circle-o"></i>Add</a></li>
+            <li><a href="admin.php?view=edit_news"><i class="fa fa-circle-o"></i>Edit</a></li>
+          </ul>
+        </li>
+        <li><a href="admin.php?view=edit_about"><i class="fa fa-table"></i> <span>Edit about us</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
   </aside>
 
+  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Transaction logs
+        Add/Edit News
       </h1>
 
     </section>
@@ -98,32 +112,37 @@
     <!-- Main content -->
     <section class="content container-fluid">
 
-      <div class="box">
-        <div class="box-header">
-          <h3 class="box-title">Logs</h3>
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Add news</h3>
         </div>
-        <div class="box-body">
-          <table id="example1" class="table table-bordered table-striped">
-            <thead>
-            <tr>
-              <th>სახელი</th>
-              <th>გვარი</th>
-              <th>თარიღი</th>
-              <th>თანხა</th>
-            </tr>
-            </thead>
-            <tbody>
-            </tbody>
-            <tfoot>
-            <tr>
-              <th>სახელი</th>
-              <th>გვარი</th>
-              <th>თარიღი</th>
-              <th>თანხა</th>
-            </tr>
-            </tfoot>
-          </table>
-        </div>
+
+        <form class="form-add" role="form" method="post" action="loader.php">
+          <div class="box-body">
+
+            <div class="form-group">
+              <label for="titleInput">Title</label>
+              <input type="text" name="name" class="form-control" id="titleInput" placeholder="title ...">
+            </div>
+
+            <div class="form-group">
+              <label for="imgInput">Cover image</label>
+              <input type="file" name="img" id="imgInput">
+              <p class="help-block">only 4:3 resolution images</p>
+            </div>
+
+            <div class="form-group">
+              <label for="editor1">Description</label>
+              <textarea name="full_desc" id="editor1" rows="10" cols="80"></textarea>
+            </div>
+
+            <div class="callout callout-danger error-box" style="display:none"></div>
+            <div class="callout callout-success success-box" style="display:none"></div>
+          </div>
+          <div class="box-footer">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
       </div>
 
 
@@ -145,19 +164,16 @@
 <script src="views/AdminLTE-2.4.3/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="views/AdminLTE-2.4.3/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-<script src="views/AdminLTE-2.4.3/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="views/AdminLTE-2.4.3/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="views/AdminLTE-2.4.3/dist/js/adminlte.min.js"></script>
 
 <script src="views/AdminLTE-2.4.3/bower_components/ckeditor/ckeditor.js"></script>
 
-<script src="views/AdminLTE-2.4.3/dist/js/edit.js"></script>
+<script src="views/AdminLTE-2.4.3/dist/js/push.js"></script>
 
 <script>
   $(function () {
-    $('#example1').drawTable();
+    CKEDITOR.replace('editor1')
   })
 </script>
 
