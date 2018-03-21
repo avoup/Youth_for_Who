@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Admin</title>
+  
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="stylesheet" href="views/AdminLTE-2.4.3/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="views/AdminLTE-2.4.3/bower_components/font-awesome/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="views/AdminLTE-2.4.3/bower_components/Ionicons/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="views/AdminLTE-2.4.3/dist/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+        page. However, you can choose any other skin. Make sure you
+        apply the skin class to the body tag so the changes take effect. -->
+  <link rel="stylesheet" href="views/AdminLTE-2.4.3/dist/css/skins/skin-purple.min.css">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <!-- Google Font -->
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+
+<body class="hold-transition skin-purple sidebar-mini">
+<div class="wrapper">
+
+  <!-- Main Header -->
+  <header class="main-header">
+
+    <!-- Logo -->
+    <a href="#" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>A</b>LT</span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>Admin</b>LTE</span>
+    </a>
+
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-static-top" role="navigation">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+      <!-- Navbar Right Menu -->
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+
+          <li>
+            <form action="index.php">
+              <button type="submit" name="logout" value="1" class="btn bg-purple btn-flat margin">Logout <i class="fa fa-sign-out"></i></button>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <aside class="main-sidebar">
+
+    <section class="sidebar">
+
+      <!-- Sidebar Menu -->
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="header">MENU</li>
+        <li class="treeview active">
+          <a href="#"><i class="fa fa-edit"></i> <span>Add/edit Projects</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="active"><a href="admin.php?view=add"><i class="fa fa-circle-o"></i>Add</a></li>
+            <li><a href="admin.php?view=edit"><i class="fa fa-circle-o"></i>Edit</a></li>
+          </ul>
+        </li>
+        <li><a href="admin.php?view=logs"><i class="fa fa-table"></i> <span>Transactions log</span></a></li>
+      </ul>
+      <!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Add/Edit Projects
+      </h1>
+
+    </section>
+
+    <!-- Main content -->
+    <section class="content container-fluid">
+
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Add new project</h3>
+        </div>
+
+        <form class="form-add" role="form" method="post" action="loader.php">
+          <div class="box-body">
+
+            <div class="form-group">
+              <label for="titleInput">Title</label>
+              <input type="text" name="name" class="form-control" id="titleInput" placeholder="title ...">
+            </div>
+
+            <div class="form-group">
+              <label for="descriptionInput">Short description</label>
+              <input type="text" name="desc" class="form-control" id="descriptionInput" placeholder="short description ...">
+            </div>
+
+            <div class="form-group">
+              <label for="imgInput">Cover image</label>
+              <input type="file" name="img" id="imgInput">
+              <p class="help-block">only 4:3 resolution images</p>
+            </div>
+  <!-- ========== main img === -->
+            <div class="form-group">
+              <label for="imgInput_main">Main image</label>
+              <input type="file" name="img" id="imgInput_main">
+              <p class="help-block">only 16:9 resolution images</p>
+            </div>
+
+            <div class="form-group">
+              <label for="editor1">Description</label>
+              <textarea name="full_desc" id="editor1" rows="10" cols="80"></textarea>
+            </div>
+            <div class="radio">
+              <label><input type="radio" name="status" value="1" checked>მიმდინარე</label>
+              <label><input type="radio" name="status" value="2">დასრულებული</label>
+            </div>
+
+            <div class="callout callout-danger error-box" style="display:none"></div>
+            <div class="callout callout-success success-box" style="display:none"></div>
+          </div>
+          <div class="box-footer">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <!-- Default to the left -->
+    <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+  </footer>
+
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 3 -->
+<script src="views/AdminLTE-2.4.3/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="views/AdminLTE-2.4.3/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- AdminLTE App -->
+<script src="views/AdminLTE-2.4.3/dist/js/adminlte.min.js"></script>
+
+<script src="views/AdminLTE-2.4.3/bower_components/ckeditor/ckeditor.js"></script>
+
+<script src="views/AdminLTE-2.4.3/dist/js/push.js"></script>
+
+<script>
+  $(function () {
+    CKEDITOR.replace('editor1')
+  })
+</script>
+
+</body>
+</html>

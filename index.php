@@ -1,4 +1,5 @@
 <?php
+
 error_reporting(E_ALL);
 session_start();
 include('php/database/mysql.php');
@@ -12,21 +13,35 @@ include_once('php/session.php');
 $userControler = new userController();
 
 
-if(isset($_REQUEST['register'])) {
+if (isset($_REQUEST['register'])) {
     $userControler->register();
-} else if(isset($_REQUEST['logout'])) {
+} else if (isset($_REQUEST['logout'])) {
     $userControler->logout();
 } else {
     $userControler->login();
 }
 // session_destroy();
 
-if(isset($_REQUEST['adminpage'])) {
-    include('views/admin.html');
-} else if(isset($_REQUEST['register'])) {
-    include('views/register.html');
-} else if(isset($_REQUEST['login'])) {
-    include('views/login.html');
-} else include('views/index.html');
-
+if (isset($_REQUEST['adminpage'])) {
+    include('views/AdminLTE-2.4.3/starter.html');
+} else if (isset($_REQUEST['add'])) {
+    include('views/AdminLTE-2.4.3/pages/custom/add.html');
+} else if (isset($_REQUEST['edit'])) {
+    include('views/AdminLTE-2.4.3/pages/custom/edit.html');
+} else if (isset($_REQUEST['logs'])) {
+    include('views/AdminLTE-2.4.3/pages/custom/logs.html');
+} else {
+    $view = 'views/';
+    $view .= isset($_REQUEST['view']) ? $_REQUEST['view'] : 'index';
+    $view .= '.html';
+    include($view);
+}
+/*
+  if(isset($_REQUEST['adminpage'])) {
+  include('views/AdminLTE-2.4.3/starter.html');
+  } else if(isset($_REQUEST['register'])) {
+  include('views/register.html');
+  } else if(isset($_REQUEST['login'])) {
+  include('views/login.html');
+  } elseinclude('views/index.html'); */
 ?>

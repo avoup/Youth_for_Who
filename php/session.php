@@ -20,12 +20,12 @@ if(!isset($_SESSION['id11'])) {
 
 		//print_r($userInfo);
 		//die;
-		if(isset($userInfo['cursor']['password'])) {
-			$sid = hash('sha256', $userInfo['cursor']['password'].$userInfo['cursor']['createtime']);
+		if(isset($userInfo['cursor'][0]['password'])) {
+			$sid = hash('sha256', $userInfo['cursor'][0]['password'].$userInfo['cursor'][0]['createtime']);
 			
-			if($sid == $userInfo['cursor']['session_id']) {
-				$_SESSION['id11'] = $userInfo['cursor']['username'];
-				$_SESSION['role'] = $userInfo['cursor']['role'];
+			if($sid == $userInfo['cursor'][0]['session_id']) {
+				$_SESSION['id11'] = $userInfo['cursor'][0]['username'];
+				$_SESSION['role'] = $userInfo['cursor'][0]['role'];
 			}
 		}
 	}
