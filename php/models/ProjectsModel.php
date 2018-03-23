@@ -36,9 +36,9 @@ class ProjectModel {
         $row = $db->execCursor($query, $params);
 
         if (isset($row['cursor'][0]['id'])) {
-            $query = "select count(id) cnt from projects where status = ".$status;
+            $query = "select count(id) cnt from projects where status = " . $status;
             $data = $db->execQuery($query);
-            $response = array('success' => true, 'response' => $row['cursor'], 'cnt' => ceil($data[0]['cnt']/$num));
+            $response = array('success' => true, 'response' => $row['cursor'], 'cnt' => ceil($data[0]['cnt'] / $num));
         } else
             $response = array('success' => false, 'response' => 'no projects to view');
 
@@ -62,11 +62,13 @@ class ProjectModel {
        proj.donated_amount,
        full_amount-current_amount as in_need,
        a.id cover_img_id,
-       a.href cover_img
+       a.href cover_img,
+       proj.web_link link
   FROM company.projects proj,
        company.project_attachments a
  where proj.id = :id
-   and proj.main_img = a.id";
+   and proj.main_img = a.id
+ order by proj.id desc";
 
         $params = array(0 => array('name' => ':id', 'value' => $id, 'type' => PDO::PARAM_INPUT_OUTPUT, 'size' => -1));
 
@@ -74,7 +76,7 @@ class ProjectModel {
 
         if (isset($row['cursor'][0]['id'])) {
             $response = array('success' => true, 'response' => $row['cursor'][0]);
-            $response['response']['files'] = $this->getAttachments($id, 1); 
+            $response['response']['files'] = $this->getAttachments($id, 1);
             $response['response']['main_imgs'] = $this->getAttachments($id, 2);
         } else
             $response = array('success' => false, 'response' => 'no projects to view');
@@ -106,7 +108,7 @@ class ProjectModel {
         $db = ($this->sql);
         $db->execNonQuery($query);
     }
-    
+
     public function updateFiles($id, $type, $location) {
         $query = "update project_attachments set href = '$location', type = $type "
                 . " where id = $id";
@@ -132,7 +134,7 @@ class ProjectModel {
         $query = "select max(id) id from project_attachments";
         $data = $db->execQuery($query);
         $ids['img_id_main'] = $data[0]['id'];
-        
+
         $query = "insert into project_attachments (href,project_id,type) values (''," . $ids['project_id'] . ",3)";
         $db->execNonQuery($query);
 
@@ -143,12 +145,12 @@ class ProjectModel {
         return $ids;
     }
 
-    public function updateProject($id, $name, $desc, $fullDesc, $age, $location, $diagnoses, $needs, $fullAmount, $currentAmount, $donatedAmount, $status, $mainImg) {
+    public function updateProject($id, $name, $desc, $fullDesc, $age, $location, $diagnoses, $needs, $fullAmount, $currentAmount, $donatedAmount, $status, $link) {
         $db = $this->sql;
         $uParams = array(0 => 'name', 1 => 'description', 2 => 'full_desc', 3 => 'age', 4 => 'location', 5 => 'diagnoses', 6 => 'needs', 7 => 'full_amount',
-            8 => 'current_amount', 9 => 'donated_amount', 10 => 'status', 11 => 'main_img');
+            8 => 'current_amount', 9 => 'donated_amount', 10 => 'status', 11 => 'web_link');
         $uValues = array(0 => array('name' => $name, 'description' => $desc, 'full_desc' => $fullDesc, 'age' => $age, 'location' => $location, 'diagnoses' => $diagnoses, 'needs' => $needs,
-                'full_amount' => $fullAmount, 'current_amount' => $currentAmount, 'donated_amount' => $donatedAmount, 'status' => $status, 'main_img' => $mainImg));
+                'full_amount' => $fullAmount, 'current_amount' => $currentAmount, 'donated_amount' => $donatedAmount, 'status' => $status, 'web_link' => $link));
         $wParams = array(0 => 'id');
         $wValues = array(0 => array('id' => $id));
 
@@ -179,6 +181,32 @@ class ProjectModel {
         $db = ($this->sql);
         $query = "delete from projects where id = " . $id;
         $db->execNonQuery($query);
+    }
+
+    public function getDonationlogs($startDate, $endDate, $amount) {
+        $db = ($this->sql);
+        $params = array();
+
+        $query = "select l.*
+                    FROM company.log l
+                   where 1=1";
+
+        if ($startDate != '') {
+            $query .= " and create_date >= str_to_date(:start_date,'%d.%m.%Y')";
+            $params[sizeof($params)] = array('name' => ':start_date', 'value' => $startDate, 'type' => PDO::PARAM_STR | PDO::PARAM_INPUT_OUTPUT, 'size' => -1);
+        }
+        if ($endDate != '') {
+            $query .= " and create_date <= str_to_date(concat(:end_date,' 23:59:59'),'%d.%m.%Y  %H:%i:%s')";
+            $params[sizeof($params)] = array('name' => ':end_date', 'value' => $endDate, 'type' => PDO::PARAM_STR | PDO::PARAM_INPUT_OUTPUT, 'size' => -1);
+        }
+        if ($amount >= 0) {
+            $query .= " and amount = :amount";
+            $params[sizeof($params)] = array('name' => ':amount', 'value' => $amount, 'type' => PDO::PARAM_INPUT_OUTPUT, 'size' => -1);
+        }
+
+        $response = $db->execCursor($query, $params);
+
+        return $response['cursor'];
     }
 
 }

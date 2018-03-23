@@ -36,6 +36,23 @@ class UserModel {
 
         return $response;
     }
+    
+    function changePass($id,$password) {
+        $response = array();
+        $db = ($this->sql);
+        
+        $query = "select salt from users where id = :id";
+        $params = array(0 => array('name' => ':id', 'value' => $id, 'type' => PDO::PARAM_INPUT_OUTPUT, 'size' => -1));
+        $salt = $db->execStatement($query, $params);
+
+        $salt = isset($salt[0]['salt']) ? $salt[0]['salt'] : '';
+        $password = hash("sha256", $password . $salt);
+        
+        $query = "update users set password = '".$password."' 
+                where id = ".$id;
+        
+        $db->execNonQuery($query);
+    }
 
     function register($userInfo) {
         $params = array_keys($userInfo);

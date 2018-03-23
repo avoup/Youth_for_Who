@@ -7,7 +7,6 @@ include('php/library/functions.php');
 class UserController {
 
     function __construct() {
-        
     }
 
     function login() {
@@ -130,6 +129,40 @@ class UserController {
             $response = $model->checkEMail($_REQUEST['email']);
         }
 
+        return $response;
+    }
+    
+    public function changePass() {
+        $new_pass = get_request('new_pass');
+        $repeated_pass = get_request('repeated_pass');
+        $old_pass = get_request('old_pass');
+        
+        $model = new UserModel();
+        $detailed_error = array('username' => '0', 'password' => '0', 'email' => '0', 'repeated_password' => '0');
+        $response = $model->getLoginInfo($_SESSION['id11'], $old_pass);
+        
+        if (strlen($new_pass) < 4 || strlen($new_pass) > 20) {
+            $detailed_error['password'] = 'password length should be between 4-20';
+            $response['success'] = false;
+        }
+
+        if ($new_pass != $repeated_pass) {
+            $detailed_error['repeated_password'] = 'Passwords don\'t match';
+            $response['success'] = false;
+        }
+        
+        if (!isset($_SESSION['id11'])) {
+            $response['error'] = 'please log in';
+            $response['success'] = false;
+        }
+        
+        $response['errors'] = $detailed_error;
+        
+        if(!$response['success'])
+            return $response;
+        
+        $model->changePass($response['response']['id'],$new_pass);
+        
         return $response;
     }
 

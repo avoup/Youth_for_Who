@@ -81,7 +81,7 @@ class ProjectsController {
 
         $model = new ProjectModel();
         $ids = $model->createProject();
-        $model->updateProject($ids['project_id'], $name, $desc, $fullDesc, $age, $location, $diagnoses, $needs, $fullAmount, $currentAmount, $donatedAmount, $status, $ids['img_id']);
+        $model->updateProject($ids['project_id'], $name, $desc, $fullDesc, $age, $location, $diagnoses, $needs, $fullAmount, $currentAmount, $donatedAmount, $status);
 //return($_FILES);
         mkdir("attachment/uploads/" . $ids['project_id'] . "/", 0700);
 
@@ -112,7 +112,7 @@ class ProjectsController {
         $img_main = get_request('main_img_id', 'number');
 
         $model = new ProjectModel();
-        $model->updateProject($id, $name, $desc, $fullDesc, $age, $location, $diagnoses, $needs, $fullAmount, $currentAmount, $donatedAmount, $status, $img_cover, $img_main);
+        $model->updateProject($id, $name, $desc, $fullDesc, $age, $location, $diagnoses, $needs, $fullAmount, $currentAmount, $donatedAmount, $status);
 
         if (isset($_FILES['imgInput']))
             $this->uploadFile('imgInput', $img_cover, 3, $id);
@@ -134,6 +134,18 @@ class ProjectsController {
         $response = array('success' => true);
 
         return $response;
+    }
+    
+    public function getDonationlogs() {
+        $startDate = get_request('start_date');
+        $endDate = get_request('end_date');
+        $amount = get_request('amount', 'number', -1);
+        
+        $model = new ProjectModel();
+        $logs = array();
+        $logs = $model->getDonationLogs($startDate,$endDate,$amount);
+
+        return $logs;
     }
 
     public function deleteProject() {
