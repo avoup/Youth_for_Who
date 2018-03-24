@@ -78,10 +78,11 @@ class ProjectsController {
         $currentAmount = get_request('c_amount', 'number');
         $donatedAmount = get_request('d_amount', 'number');
         $status = get_request('status', 'number');
+        $link = get_request('link');
 
         $model = new ProjectModel();
         $ids = $model->createProject();
-        $model->updateProject($ids['project_id'], $name, $desc, $fullDesc, $age, $location, $diagnoses, $needs, $fullAmount, $currentAmount, $donatedAmount, $status);
+        $model->insertProject($ids['project_id'], $name, $desc, $fullDesc, $age, $location, $diagnoses, $needs, $fullAmount, $currentAmount, $donatedAmount, $status, $link, $ids['img_id']);
 //return($_FILES);
         mkdir("attachment/uploads/" . $ids['project_id'] . "/", 0700);
 
@@ -110,9 +111,10 @@ class ProjectsController {
         $status = get_request('status', 'number');
         $img_cover = get_request('cover_img_id', 'number');
         $img_main = get_request('main_img_id', 'number');
+        $link = get_request('link');
 
         $model = new ProjectModel();
-        $model->updateProject($id, $name, $desc, $fullDesc, $age, $location, $diagnoses, $needs, $fullAmount, $currentAmount, $donatedAmount, $status);
+        $model->updateProject($id, $name, $desc, $fullDesc, $age, $location, $diagnoses, $needs, $fullAmount, $currentAmount, $donatedAmount, $status, $link);
 
         if (isset($_FILES['imgInput']))
             $this->uploadFile('imgInput', $img_cover, 3, $id);

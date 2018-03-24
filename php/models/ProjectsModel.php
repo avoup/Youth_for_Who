@@ -156,6 +156,18 @@ class ProjectModel {
 
         $db->update($uParams, $uValues, $wParams, $wValues, 'projects');
     }
+    
+    public function insertProject($id, $name, $desc, $fullDesc, $age, $location, $diagnoses, $needs, $fullAmount, $currentAmount, $donatedAmount, $status, $link, $img) {
+        $db = $this->sql;
+        $uParams = array(0 => 'name', 1 => 'description', 2 => 'full_desc', 3 => 'age', 4 => 'location', 5 => 'diagnoses', 6 => 'needs', 7 => 'full_amount',
+            8 => 'current_amount', 9 => 'donated_amount', 10 => 'status', 11 => 'web_link', 12 => 'main_img');
+        $uValues = array(0 => array('name' => $name, 'description' => $desc, 'full_desc' => $fullDesc, 'age' => $age, 'location' => $location, 'diagnoses' => $diagnoses, 'needs' => $needs,
+                'full_amount' => $fullAmount, 'current_amount' => $currentAmount, 'donated_amount' => $donatedAmount, 'status' => $status, 'web_link' => $link, 'main_img' => $img));
+        $wParams = array(0 => 'id');
+        $wValues = array(0 => array('id' => $id));
+
+        $db->update($uParams, $uValues, $wParams, $wValues, 'projects');
+    }
 
     public function logDonation($donation) {
         $params = array_keys($donation);
