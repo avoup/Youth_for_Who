@@ -68,7 +68,7 @@
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MENU</li>
-        <li class="treeview active">
+        <li class="treeview">
           <a href="#"><i class="fa fa-edit"></i> <span>Add/edit Projects</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
@@ -76,7 +76,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="admin.php?view=add"><i class="fa fa-circle-o"></i>Add</a></li>
-            <li class="active"><a href="admin.php?view=edit"><i class="fa fa-circle-o"></i>Edit</a></li>
+            <li><a href="admin.php?view=edit"><i class="fa fa-circle-o"></i>Edit</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -90,7 +90,7 @@
             <li><a href="admin.php?view=edit_news"><i class="fa fa-circle-o"></i>Edit</a></li>
           </ul>
         </li>
-        <li class="treeview">
+        <li class="treeview active">
           <a href="#"><i class="fa fa-group"></i> <span>Add/edit Team Members</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -98,7 +98,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="admin.php?view=add_member"><i class="fa fa-circle-o"></i>Add</a></li>
-            <li><a href="admin.php?view=edit_member"><i class="fa fa-circle-o"></i>Edit</a></li>
+            <li class="active"><a href="admin.php?view=edit_member"><i class="fa fa-circle-o"></i>Edit</a></li>
           </ul>
         </li>
         <li><a href="admin.php?view=edit_about"><i class="fa fa-group"></i> <span>Edit about us</span></a></li>
@@ -112,7 +112,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Add/Edit Projects
+        Add/Edit news
       </h1>
 
     </section>
@@ -122,15 +122,14 @@
 
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Edit projects</h3>
+          <h3 class="box-title">Edit news</h3>
         </div>
         <div class="box-body">
-          <table id="project-table" class="table table-bordered table-striped" data-action="loader.php?a=ProjectsController.Projects.getProjectsList&status=1">
+          <table id="project-table" class="table table-bordered table-striped" data-action="loader.php?a=ProjectsController.Projects.getProjectsList&status=2">
             <thead>
             <tr>
               <th class="sr-only">id</th>
               <th>სათაური</th>
-              <!-- <th>დამატების თარიღი</th> -->
               <th>აღწერა</th>
               <th>რედაქტირება</th>
               <th>წაშლა</th>
@@ -161,7 +160,7 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Update Project</h4>
+        <h4 class="modal-title">Update News</h4>
       </div>
       <div class="modal-body">
         <form class="form-add" role="form" method="post" action="loader.php?a=ProjectsController.Projects.updateProject">
@@ -181,11 +180,17 @@
             </div>
   <!-- ========== main img === -->
             <div class="form-group">
+              <label for="descriptionInput">Status</label>
+              <input type="text" name="desc" class="form-control" id="descriptionInput" placeholder="short description ...">
+            </div>
+
+            <div class="form-group">
               <label for="editor1">Description</label>
               <textarea name="full_desc" id="editor1" rows="10" cols="80"></textarea>
             </div>
+
             <div class="radio">
-              <label class="hidden" ><input type="radio" name="status" value="1" checked></label>
+              <label class="hidden"><input type="radio" name="status" value="2" checked></label>
             </div>
 
             <div class="callout callout-danger error-box" style="display:none"></div>
@@ -235,7 +240,7 @@
         <h4 class="modal-title">Success</h4>
       </div>
       <div class="modal-body">
-        <p>Project Deleted!</p>
+        <p>News Deleted!</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline" onclick="window.location.reload()">OK</button>

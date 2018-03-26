@@ -92,7 +92,18 @@
             <li><a href="admin.php?view=edit_news"><i class="fa fa-circle-o"></i>Edit</a></li>
           </ul>
         </li>
-        <li><a href="admin.php?view=edit_about"><i class="fa fa-table"></i> <span>Edit about us</span></a></li>
+        <li class="treeview">
+          <a href="#"><i class="fa fa-group"></i> <span>Add/edit Team Members</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="admin.php?view=add_member"><i class="fa fa-circle-o"></i>Add</a></li>
+            <li><a href="admin.php?view=edit_member"><i class="fa fa-circle-o"></i>Edit</a></li>
+          </ul>
+        </li>
+        <li><a href="admin.php?view=edit_about"><i class="fa fa-group"></i> <span>Edit about us</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>
@@ -117,7 +128,7 @@
           <h3 class="box-title">Add news</h3>
         </div>
 
-        <form class="form-add" role="form" method="post" action="loader.php">
+        <form class="form-add" role="form" method="post" action="loader.php?a=ProjectsController.Projects.createProject">
           <div class="box-body">
 
             <div class="form-group">
@@ -134,6 +145,10 @@
             <div class="form-group">
               <label for="editor1">Description</label>
               <textarea name="full_desc" id="editor1" rows="10" cols="80"></textarea>
+            </div>
+
+            <div class="radio">
+              <label class="hidden"><input type="radio" name="status" value="2" checked></label>
             </div>
 
             <div class="callout callout-danger error-box" style="display:none"></div>
@@ -169,7 +184,7 @@
 
 <script src="views/AdminLTE-2.4.3/bower_components/ckeditor/ckeditor.js"></script>
 
-<script src="views/AdminLTE-2.4.3/dist/js/push.js"></script>
+<script src="js/push.js"></script>
 
 <script>
   $(function () {

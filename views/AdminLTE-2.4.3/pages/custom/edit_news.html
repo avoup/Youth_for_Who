@@ -90,7 +90,18 @@
             <li class="active"><a href="admin.php?view=edit_news"><i class="fa fa-circle-o"></i>Edit</a></li>
           </ul>
         </li>
-        <li><a href="admin.php?view=edit_about"><i class="fa fa-table"></i> <span>Edit about us</span></a></li>
+        <li class="treeview">
+          <a href="#"><i class="fa fa-group"></i> <span>Add/edit Team Members</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="admin.php?view=add_member"><i class="fa fa-circle-o"></i>Add</a></li>
+            <li><a href="admin.php?view=edit_member"><i class="fa fa-circle-o"></i>Edit</a></li>
+          </ul>
+        </li>
+        <li><a href="admin.php?view=edit_about"><i class="fa fa-group"></i> <span>Edit about us</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>
@@ -114,12 +125,11 @@
           <h3 class="box-title">Edit news</h3>
         </div>
         <div class="box-body">
-          <table id="project-table" class="table table-bordered table-striped">
+          <table id="project-table" class="table table-bordered table-striped" data-action="loader.php?a=ProjectsController.Projects.getProjectsList&status=2">
             <thead>
             <tr>
               <th class="sr-only">id</th>
               <th>სათაური</th>
-              <th>დამატების თარიღი</th>
               <th>აღწერა</th>
               <th>რედაქტირება</th>
               <th>წაშლა</th>
@@ -153,7 +163,7 @@
         <h4 class="modal-title">Update News</h4>
       </div>
       <div class="modal-body">
-        <form class="form-add" role="form" method="post" action="loader.php">
+        <form class="form-add" role="form" method="post" action="loader.php?a=ProjectsController.Projects.updateProject">
           <div class="box-body">
             <input type="text" name="project_id" id="idInput" style="display:none">
             <input type="text" name="cover_img_id" id="coverImgIdInput" style="display:none">
@@ -164,29 +174,17 @@
             </div>
 
             <div class="form-group">
-              <label for="descriptionInput">Short description</label>
-              <input type="text" name="desc" class="form-control" id="descriptionInput" placeholder="short description ...">
-            </div>
-
-            <div class="form-group">
               <label for="imgInput">Cover image</label>
               <input type="file" name="img" id="imgInput">
               <p class="help-block">only 4:3 resolution images</p>
             </div>
   <!-- ========== main img === -->
             <div class="form-group">
-              <label for="imgInput_main">Main image</label>
-              <input type="file" name="img" id="imgInput_main">
-              <p class="help-block">only 16:9 resolution images</p>
-            </div>
-
-            <div class="form-group">
               <label for="editor1">Description</label>
               <textarea name="full_desc" id="editor1" rows="10" cols="80"></textarea>
             </div>
             <div class="radio">
-              <label><input type="radio" name="status" value="1" checked>მიმდინარე</label>
-              <label><input type="radio" name="status" value="2">დასრულებული</label>
+              <label class="hidden"><input type="radio" name="status" value="2" checked></label>
             </div>
 
             <div class="callout callout-danger error-box" style="display:none"></div>
@@ -262,13 +260,13 @@
 
 <script src="views/AdminLTE-2.4.3/bower_components/ckeditor/ckeditor.js"></script>
 
-<script src="views/AdminLTE-2.4.3/dist/js/edit.js"></script>
+<script src="js/edit.js"></script>
 
-<script src="views/AdminLTE-2.4.3/dist/js/push.js"></script>
+<script src="js/push.js"></script>
 
 <script>
   $(function () {
-      $('#project-table').drawTable("P");
+      $('#project-table').drawTable("projects");
       CKEDITOR.replace('editor1');
   })
 </script>
