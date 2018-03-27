@@ -29,7 +29,7 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition skin-purple sidebar-mini">
-<div class="wrapper" id="edit">
+<div class="wrapper">
 
   <!-- Main Header -->
   <header class="main-header">
@@ -102,6 +102,7 @@
           </ul>
         </li>
         <li><a href="admin.php?view=edit_about"><i class="fa fa-group"></i> <span>Edit about us</span></a></li>
+        <li><a href="admin.php?view=change_pass"><i class="fa fa-key"></i> <span>Change Password</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>
@@ -125,7 +126,7 @@
           <h3 class="box-title">Edit news</h3>
         </div>
         <div class="box-body">
-          <table id="project-table" class="table table-bordered table-striped" data-action="loader.php?a=ProjectsController.Projects.getProjectsList&status=2">
+          <table id="project-table" class="table table-bordered table-striped" data-action="loader.php?a=AdminController.Admin.getTeamMembers&num=10">
             <thead>
             <tr>
               <th class="sr-only">id</th>
@@ -169,7 +170,7 @@
             <input type="text" name="cover_img_id" id="coverImgIdInput" style="display:none">
             <input type="text" name="main_img_id" id="mainImgIdInput" style="display:none">
             <div class="form-group">
-              <label for="titleInput">Title</label>
+              <label for="titleInput">Name</label>
               <input type="text" name="name" class="form-control" id="titleInput" placeholder="title ...">
             </div>
 
@@ -240,7 +241,7 @@
         <h4 class="modal-title">Success</h4>
       </div>
       <div class="modal-body">
-        <p>News Deleted!</p>
+        <p>Deleted!</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline" onclick="window.location.reload()">OK</button>
@@ -272,7 +273,7 @@
 
 <script>
   $(function () {
-      $('#project-table').drawTable("projects");
+      $('#project-table').drawTable("team_members");
       CKEDITOR.replace('editor1');
   })
 </script>

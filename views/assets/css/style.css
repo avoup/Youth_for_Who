@@ -514,7 +514,8 @@ a:hover {
   margin-bottom: 14px;
 }
 .news-img {
-  height: 380px;
+  max-height: 380px;
+  max-width: 550px;
   background-color: #f9f9f9;
   margin-bottom: 15px;
 }
@@ -544,6 +545,9 @@ a:hover {
   border-radius: 100%;
   bottom: 0;
 }
+#moreNews {
+  cursor: pointer;
+}
 .morecontent span {
     display: none;
 }
@@ -551,11 +555,20 @@ a:hover {
     display: block;
 }
 .arrow_md {
+  cursor: pointer;
   position: relative;
   margin: auto;
   margin-top: 15px;
   width: 70px;
-  height: 10px;
+  height: 20px;
+}
+.rotLeft {
+  transform: rotate(90deg);
+  float: left;
+}
+.rotRight {
+  transform: rotate(-90deg);
+  float: right;
 }
 .contact {
   padding: 50px 10px 10px 10px;

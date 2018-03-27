@@ -10,7 +10,13 @@ $.fn.drawTable = function(n, startDate, endDate){
       var response = "response",
           buttons = "<td><button class='btn btn-default getProject' data-toggle='modal' data-target='#edit-modal'><i class='fa fa-edit'></i></button></td>"
                   + "<td><button class='btn btn-default deleteProj' data-toggle='confirmation' data-title='are you serious?'><i class='fa fa-close'></i></button></td>";
+      var deleteURL = "loader.php?a=ProjectsController.Projects.deleteProject&project_id=";
       break;
+    case "team_members":
+      var response = "";
+      var buttons = "<td><button class='btn btn-default getProject' data-toggle='modal' data-target='#edit-modal'><i class='fa fa-edit'></i></button></td>"
+              + "<td><button class='btn btn-default deleteProj' data-toggle='confirmation' data-title='are you serious?'><i class='fa fa-close'></i></button></td>";
+      var deleteURL = "loader.php?a=AdminController.Admin.deleteTeamMember&id=";
     case "logs":
       formURL += "&start_date=" + startDate + "&end_date=" + endDate;
       var response = "",
@@ -24,6 +30,7 @@ $.fn.drawTable = function(n, startDate, endDate){
     dataType: 'json',
     success:function(data, textStatus, jqXHR){
       if(data.success){
+        console.log(data);
         response = data[response] != undefined ? data[response] : data;
         $.each(response, function(i, field){
           var optional = field.description || field.amount ,
@@ -54,7 +61,7 @@ $.fn.drawTable = function(n, startDate, endDate){
           'autoWidth'   : false
         });
         getProjects();
-        deleteProj();
+        deleteProj(deleteURL);
       } else {
         alert(data.response)
       }
@@ -85,7 +92,7 @@ $.fn.drawTable = function(n, startDate, endDate){
     };
   // ================================================================== /get project by id
   // ================================================================== delete project
-function deleteProj(){
+function deleteProj(u){
   var butt = $(".deleteProj");
   var yes = $("#yesButton");
 
@@ -93,7 +100,8 @@ function deleteProj(){
     $("#modal-danger").modal("show");
     var id = $(this).parent().siblings(".getId").html();
     $(yes).click(function(){
-      var idURL = "loader.php?a=ProjectsController.Projects.deleteProject&project_id=";
+      // if($("#team"))
+      var idURL = u;
       idURL += id;
       $.ajax({
         url: idURL,

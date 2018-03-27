@@ -11,8 +11,11 @@ $(function() {
     event.preventDefault();
         ckUpdate()
         var formData = new FormData(this);
-        var fileName = $("#imgInput").val();
-        var fileData = $("#imgInput").prop("files")[0];
+        if($("#imgInput")){
+          var fileName = $("#imgInput").val();
+          var fileData = $("#imgInput").prop("files")[0];
+
+        }
         var inputData = $('.form-add');
         var succ;
         formData.append('imgInput', fileData);
@@ -54,9 +57,8 @@ $(function() {
                           }
             },
             error   : function(jXHR, textStatus, errorThrown) {
-                      console.log('error');
                       console.log(errorThrown);
-
+                      alert("operation couldn/'t be completed")
             }
         });
   });

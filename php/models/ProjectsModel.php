@@ -24,7 +24,8 @@ class ProjectModel {
 			         @rownum := @rownum + 1 as rank
                             FROM company.projects t,
                          (select @rownum := 0) r
-                   where t.status = :status) proj,
+                   where t.status = :status
+                   order by t.id desc) proj,
                          project_attachments a
                    where proj.rank between :start and :finish
                      and a.id = proj.main_img";
@@ -204,11 +205,11 @@ class ProjectModel {
                    where 1=1";
 
         if ($startDate != '') {
-            $query .= " and create_date >= str_to_date(:start_date,'%d.%m.%Y')";
+            $query .= " and create_date >= str_to_date(:start_date,'%d/%m/%Y')";
             $params[sizeof($params)] = array('name' => ':start_date', 'value' => $startDate, 'type' => PDO::PARAM_STR | PDO::PARAM_INPUT_OUTPUT, 'size' => -1);
         }
         if ($endDate != '') {
-            $query .= " and create_date <= str_to_date(concat(:end_date,' 23:59:59'),'%d.%m.%Y  %H:%i:%s')";
+            $query .= " and create_date <= str_to_date(concat(:end_date,' 23:59:59'),'%d/%m/%Y  %H:%i:%s')";
             $params[sizeof($params)] = array('name' => ':end_date', 'value' => $endDate, 'type' => PDO::PARAM_STR | PDO::PARAM_INPUT_OUTPUT, 'size' => -1);
         }
         if ($amount >= 0) {

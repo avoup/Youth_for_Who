@@ -70,7 +70,7 @@
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MENU</li>
-        <li class="treeview">
+        <li class="treeview ">
           <a href="#"><i class="fa fa-edit"></i> <span>Add/edit Projects</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
@@ -81,14 +81,14 @@
             <li><a href="admin.php?view=edit"><i class="fa fa-circle-o"></i>Edit</a></li>
           </ul>
         </li>
-        <li class="treeview active">
+        <li class="treeview">
           <a href="#"><i class="fa fa-edit"></i> <span>Add/edit News</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="admin.php?view=add_news"><i class="fa fa-circle-o"></i>Add</a></li>
+            <li><a href="admin.php?view=add_news"><i class="fa fa-circle-o"></i>Add</a></li>
             <li><a href="admin.php?view=edit_news"><i class="fa fa-circle-o"></i>Edit</a></li>
           </ul>
         </li>
@@ -104,7 +104,7 @@
           </ul>
         </li>
         <li><a href="admin.php?view=edit_about"><i class="fa fa-group"></i> <span>Edit about us</span></a></li>
-        <li><a href="admin.php?view=change_pass"><i class="fa fa-key"></i> <span>Change Password</span></a></li>
+        <li class="active"><a href="admin.php?view=change_pass"><i class="fa fa-key"></i> <span>Change Password</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>
@@ -116,7 +116,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Add/Edit News
+        Change Password
       </h1>
 
     </section>
@@ -126,30 +126,25 @@
 
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Add news</h3>
+          <h3 class="box-title"></h3>
         </div>
 
-        <form class="form-add" role="form" method="post" action="loader.php?a=ProjectsController.Projects.createProject">
+        <form class="form-add" role="form" method="post">
           <div class="box-body">
 
             <div class="form-group">
-              <label for="titleInput">Title</label>
-              <input type="text" name="name" class="form-control" id="titleInput" placeholder="title ...">
+              <label for="newPass">New Password</label>
+              <input type="password" name="new_pass" class="form-control" id="newPass" required>
             </div>
 
             <div class="form-group">
-              <label for="imgInput">Cover image</label>
-              <input type="file" name="img" id="imgInput">
-              <p class="help-block">only 4:3 resolution images</p>
+              <label for="repeatPass">Repeat Password</label>
+              <input type="password" name="repeated_pass" class="form-control" id="repeatPass" required>
             </div>
 
             <div class="form-group">
-              <label for="editor1">Description</label>
-              <textarea name="desc" id="editor1" rows="10" cols="80"></textarea>
-            </div>
-
-            <div class="radio">
-              <label class="hidden"><input type="radio" name="status" value="2" checked></label>
+              <label for="oldPass">Old Password</label>
+              <input type="password" name="old_pass" class="form-control" id="oldPass" required>
             </div>
 
             <div class="callout callout-danger error-box" style="display:none"></div>
@@ -183,15 +178,8 @@
 <!-- AdminLTE App -->
 <script src="views/AdminLTE-2.4.3/dist/js/adminlte.min.js"></script>
 
-<script src="views/AdminLTE-2.4.3/bower_components/ckeditor/ckeditor.js"></script>
+<script src="js/auth.js"></script>
 
-<script src="js/push.js"></script>
-
-<script>
-  $(function () {
-    CKEDITOR.replace('editor1')
-  })
-</script>
 
 </body>
 </html>

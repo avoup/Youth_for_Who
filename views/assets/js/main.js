@@ -6,7 +6,7 @@ function showToggle() {
     var lesstext = "Show less";
 
 
-    $('.more').each(function() {
+    $('p', '.more').each(function() {
         var content = $(this).html();
 
         if(content.length > showChar) {

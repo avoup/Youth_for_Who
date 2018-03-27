@@ -1,21 +1,24 @@
 $(function(){
   var page = 1;
-  var pages = 1;
+  var page_news = 1;
+  // var pages = 1;
 
-function clickies(){
+function clickies(p){
   var next = $("#nextPage");
   var prev = $("#prevPage");
+  checkPage();
+  pages = p;
   next.click(function(){
     if(page < pages){
       page += 1;
-      getCauses();
+      getCauses(props[0], page);
       checkPage();
     }
   });
   prev.click(function(){
     if(page > 1){
       page -= 1;
-      getCauses();
+      getCauses(props[0], page);
       checkPage();
     }
   });
@@ -28,40 +31,68 @@ function clickies(){
       } else if (page == pages){
         $(next).parent().addClass("disabled");
         $(prev).parent().removeClass("disabled");
+      } else if (page == 1 && page == pages){
+        $(next).parent().addClass("disabled");
+        $(prev).parent().addClass("disabled");
       }
   }
 };
-// ================================================================== get causes
-function getCauses(prop) {
-  var formURL = "loader.php?a=ProjectsController.Projects.getProjectsList&page="
-              + prop.page + "&status=" + prop.page + "&num=" + prop.num;
 
+function moreBtn(p){
+  var n = $(".project_block").length;
+  if (n < 8){
+    for(var i=0; i < 8-n; n++){
+      var ph = "<div class='col-xs-6 col-md-4 project_block'>"
+      + "</div>";
+      $("#tProjects").append(ph);
+    }
+  }
+  var more = "<div class='col-xs-6 col-md-4' id='more_projects'>"
+  + "<h3>იხილეთ მეტი პროექტი</h3>"
+  + "<div class='arrow arrow_md rotLeft disabled' id='prevPage'></div>"
+  + "<div class='arrow arrow_md rotRight' id='nextPage'></div>"
+  + "</div>";
+  $(".project_block").last().before(more);
+  clickies(p);
+}
+
+function moreNews(){
+  $("#moreNews").click(function(){
+    getCauses(props[1], ++page_news)
+  })
+}
+// ================================================================== get causes
+function getCauses(prop, pg) {
+  // page = pg || 1;
+  var formURL = prop.url + "&page=" + pg;
   $.ajax({
       url: formURL,
       type: 'POST',
       dataType: 'json',
       success:function(data, textStatus, jqXHR){
         if (data.success){
-           var count = Object.keys(data.response).length;
-           // console.log(count);
-           $(".our-causes .row").empty();
-           pages = data.cnt;
+           // var count = Object.keys(data.response).length;
+           if(prop.status==1){$(prop.target).empty();}
+           var pages = data.cnt;
            $.each(data.response, function(i, field){
              var html ='';
                $.each(prop.html, function(j, fiel){
-                 if(j%2){
-                   html += eval(fiel);
-                 } else {
-                   html += fiel;
-                 }
+                 if(j%2){html += eval(fiel);} else {html += fiel;}
                });
              $(prop.target).append(html);
-           });
-           showToggle();
+           }); //======/each
+
+           if (prop.status == 2){showToggle();moreNews();};
+
+           if (prop.status==1 && pages>1 ){
+             moreBtn(pages);
+           };
+
            showModal();
+
          } else {
            $(prop.target).empty();
-           var html = "<h4 class='text-center'>პროექტები ვერ მოიძებნა</h4>";
+           var html = "<h4 class='text-center'>ვერ მოიძებნა</h4>";
            $(prop.target).prepend(html);
          }
       },
@@ -73,16 +104,11 @@ function getCauses(prop) {
 
   });
 }
-  clickies();
-  // var html = "<div class='col-xs-6 col-md-4 project_block'>"
-  //       + "<img src='" + field.img + "' class='img-responsive'>"
-  //       + "<h3 class='centered'>" + eval(test) + "</h3>"
-  //       + "<p>" + field.description + "</p>"
-  //       +"</div>";
 
   var props = [
     {
       target:"#tProjects",
+      url   : "loader.php?a=ProjectsController.Projects.getProjectsList&status=1&num=8",
       status: 1,
       num   : 9,
       page  : 1,
@@ -90,42 +116,44 @@ function getCauses(prop) {
                "field['img']",
                "' class='img-responsive'><h3 class='centered'>",
                "field['name']",
-               "</h3><p>",
-               "field['desc']",
-               "</p></div>"]
+               "</h3>",
+               "field['description']",
+               "</div>"]
     },
     {
       target:"#tNews",
+      url   : "loader.php?a=ProjectsController.Projects.getProjectsList&status=2&num=6",
       status: 2,
       num   : 6,
       page  : 1,
-      html  : ["<div class='col-md-12'><div class='news-container'><div class='news-img'></div><h4>",
+      html  : ["<div class='col-md-12'><div class='news-container'><img src='",
+               "field['img']",
+               "'class='news-img img-responsive'><h4>",
                "field['name']",
-               "</h4><h6>",
-               "field['status']",
-               "</h6><span class='more'>",
+               "</h4><h6></h6><span class='more'>",
                "field['description']",
                "</span></div></div>"
               ]
-    },
-    {
-      target:"#tTeam",
-      status: 3,
-      num   : 3,
-      page  : 1,
-      html  : ["<div class='col-xs-6 col-sm-4'><div class='member'><div class='visual'><img src='",
-               "field['img']",
-               "' class='img-responsive' width='200'></div><div class='text'><h4>",
-               "field['name']",
-               "</h4><h6>",
-               "field['status']",
-               "</h6><p>",
-               "field['description']",
-               "</p></div></div></div>"]
     }
+    // {
+    //   target:"#tTeam",
+    //   url   : "loader.php?a=AdminController.Admin.getTeamMembers&num=3",
+    //   status: 3,
+    //   num   : 3,
+    //   page  : 1,
+    //   html  : ["<div class='col-xs-6 col-sm-4'><div class='member'><div class='visual'><img src='",
+    //            "field['img']",
+    //            "' class='img-responsive' width='200'></div><div class='text'><h4>",
+    //            "field['name']",
+    //            "</h4><h6>",
+    //            "field['status']",
+    //            "</h6><p>",
+    //            "field['description']",
+    //            "</p></div></div></div>"]
+    // }
   ];
   $.each(props, function(i, field){
-    getCauses(field);
+    getCauses(field, 1);
   });
 
 // ================================================================== /get causes
