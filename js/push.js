@@ -11,10 +11,9 @@ $(function() {
     event.preventDefault();
         ckUpdate()
         var formData = new FormData(this);
-        if($("#imgInput")){
+        if($("#imgInput").length){
           var fileName = $("#imgInput").val();
           var fileData = $("#imgInput").prop("files")[0];
-
         }
         var inputData = $('.form-add');
         var succ;
@@ -24,13 +23,6 @@ $(function() {
           var fileData2 = $("#imgInput_main").prop("files")[0];
           formData.append('imgInput_main', fileData2);
         }
-        // if ($("#edit").length > 0 ){
-        //   url = "loader.php?a=ProjectsController.Projects.updateProject";
-        //   succ = "updated";
-        // } else {
-        //   url = "loader.php?a=ProjectsController.Projects.createProject";
-        //   succ = "added";
-        // }
         $.ajax({
             type    : 'POST',
             url     :  url,

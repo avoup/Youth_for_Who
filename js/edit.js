@@ -90,6 +90,7 @@ $.fn.drawTable = function(n, startDate, endDate){
         });
       });
     };
+
   // ================================================================== /get project by id
   // ================================================================== delete project
 function deleteProj(u){
@@ -125,4 +126,10 @@ function deleteProj(u){
   });
 }
 
+}
+function getAbout(){
+  var url = "loader.php?a=MenuController.Menu.getPageData";
+  $.getJSON(url, function(result){
+    CKEDITOR.instances.editor1.setData(result[0].text);
+  })
 }

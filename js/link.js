@@ -64,37 +64,39 @@ function moreNews(){
 // ================================================================== get causes
 function getCauses(prop, pg) {
   // page = pg || 1;
-  var formURL = prop.url + "&page=" + pg;
+  var formURL = prop.url + pg;
   $.ajax({
       url: formURL,
       type: 'POST',
       dataType: 'json',
       success:function(data, textStatus, jqXHR){
-        if (data.success){
-           // var count = Object.keys(data.response).length;
-           if(prop.status==1){$(prop.target).empty();}
-           var pages = data.cnt;
-           $.each(data.response, function(i, field){
-             var html ='';
-               $.each(prop.html, function(j, fiel){
-                 if(j%2){html += eval(fiel);} else {html += fiel;}
-               });
-             $(prop.target).append(html);
-           }); //======/each
+        if (prop.type == 0){
+          if (data.success){
+            if(prop.status==1){$(prop.target).empty();}
+            var pages = data.cnt;
+            $.each(data.response, function(i, field){
+              var html ='';
+              $.each(prop.html, function(j, fiel){
+                if(j%2){html += eval(fiel);} else {html += fiel;}
+              });
+              $(prop.target).append(html);
+            }); //======/each
 
-           if (prop.status == 2){showToggle();moreNews();};
+            if (prop.status == 2){showToggle();moreNews();};
 
-           if (prop.status==1 && pages>1 ){
-             moreBtn(pages);
-           };
-
-           showModal();
-
-         } else {
-           $(prop.target).empty();
-           var html = "<h4 class='text-center'>ვერ მოიძებნა</h4>";
-           $(prop.target).prepend(html);
-         }
+            if (prop.status==1 && pages>1 ){
+              moreBtn(pages);
+            };
+            showModal();
+          } else {
+            $(prop.target).empty();
+            var html = "<h4 class='text-center'>ვერ მოიძებნა</h4>";
+            $(prop.target).prepend(html);
+          }
+        } else {
+          var html = data[0].text;
+          $(prop.target).prepend(html);
+        }
       },
 
       error: function(jqXHR, textStatus, errorThrown)  {
@@ -108,7 +110,8 @@ function getCauses(prop, pg) {
   var props = [
     {
       target:"#tProjects",
-      url   : "loader.php?a=ProjectsController.Projects.getProjectsList&status=1&num=8",
+      url   : "loader.php?a=ProjectsController.Projects.getProjectsList&status=1&num=8&page=",
+      type  : 0,
       status: 1,
       num   : 9,
       page  : 1,
@@ -122,7 +125,8 @@ function getCauses(prop, pg) {
     },
     {
       target:"#tNews",
-      url   : "loader.php?a=ProjectsController.Projects.getProjectsList&status=2&num=6",
+      url   : "loader.php?a=ProjectsController.Projects.getProjectsList&status=2&num=6&page=",
+      type  : 0,
       status: 2,
       num   : 6,
       page  : 1,
@@ -134,10 +138,17 @@ function getCauses(prop, pg) {
                "field['description']",
                "</span></div></div>"
               ]
+    },
+    {
+      target: "#tAbout",
+      url   : "loader.php?a=MenuController.Menu.getPageData",
+      type  : 1,
+      page  : ""
     }
     // {
     //   target:"#tTeam",
     //   url   : "loader.php?a=AdminController.Admin.getTeamMembers&num=3",
+    //   type  : 0,
     //   status: 3,
     //   num   : 3,
     //   page  : 1,
@@ -153,7 +164,7 @@ function getCauses(prop, pg) {
     // }
   ];
   $.each(props, function(i, field){
-    getCauses(field, 1);
+    getCauses(field, field.page);
   });
 
 // ================================================================== /get causes
