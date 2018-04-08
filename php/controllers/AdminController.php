@@ -41,4 +41,11 @@ class AdminController {
         return $response;
     }
 
+    public function getTeamMembers() {
+        $model = new AdminModel();
+        $response = $model ->getTeamMembers();
+        
+        return $response;
+    }
+
 }

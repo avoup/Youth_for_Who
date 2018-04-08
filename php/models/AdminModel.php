@@ -33,5 +33,15 @@ class AdminModel {
     public function updateTeamMember() {
         
     }
+    
+    public function getTeamMembers() {
+        $db = ($this->sql);
+        $response  = array('success' => true, 'response' => array());
+        
+        $query = "select * from team_members";
+        $response['response'] = $db->execQuery($query);
+        
+        return $response;
+    }
 
 }

@@ -10,7 +10,7 @@ class ProjectsController {
     }
 
     public function getProjectsList() {
-        $status = isset($_REQUEST['status']) ? $_REQUEST['status'] : 1;
+        $status = isset($_REQUEST['status']) ? $_REQUEST['status'] : 0;
         $page = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
         $perPageNum = isset($_REQUEST['num']) ? $_REQUEST['num'] : 6;
 
@@ -84,7 +84,7 @@ class ProjectsController {
         $ids = $model->createProject();
         $model->insertProject($ids['project_id'], $name, $desc, $fullDesc, $age, $location, $diagnoses, $needs, $fullAmount, $currentAmount, $donatedAmount, $status, $link, $ids['img_id']);
 //return($_FILES);
-        mkdir("attachment/uploads/" . $ids['project_id'] . "/", 0700);
+        mkdir("attachment/uploads/" . $ids['project_id'] . "/", 0777);
 
         if (isset($_FILES['imgInput']))
             $response = $this->uploadFile('imgInput', $ids['img_id'], 3, $ids['project_id']);

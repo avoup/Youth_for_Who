@@ -23,16 +23,20 @@ class ProjectModel {
                     from (SELECT t.*,
 			         @rownum := @rownum + 1 as rank
                             FROM company.projects t,
-                         (select @rownum := 0) r
-                   where t.status = :status
-                   order by t.id desc) proj,
+                         (select @rownum := 0) r ";
+        if ($status > 0) {
+            $query .= " where t.status = :status ";
+        }
+        $query .= " order by t.id desc) proj,
                          project_attachments a
                    where proj.rank between :start and :finish
                      and a.id = proj.main_img";
 
-        $params = array(0 => array('name' => ':status', 'value' => $status, 'type' => PDO::PARAM_INPUT_OUTPUT, 'size' => -1),
-            1 => array('name' => ':start', 'value' => $startNum, 'type' => PDO::PARAM_INPUT_OUTPUT, 'size' => -1),
-            2 => array('name' => ':finish', 'value' => $finishNum, 'type' => PDO::PARAM_INPUT_OUTPUT, 'size' => -1));
+        $params = array(0 => array('name' => ':start', 'value' => $startNum, 'type' => PDO::PARAM_INPUT_OUTPUT, 'size' => -1),
+            1 => array('name' => ':finish', 'value' => $finishNum, 'type' => PDO::PARAM_INPUT_OUTPUT, 'size' => -1));
+
+        if ($status > 0)
+            $params[2] = array('name' => ':status', 'value' => $status, 'type' => PDO::PARAM_INPUT_OUTPUT, 'size' => -1);
 
         $row = $db->execCursor($query, $params);
 
@@ -157,7 +161,7 @@ class ProjectModel {
 
         $db->update($uParams, $uValues, $wParams, $wValues, 'projects');
     }
-    
+
     public function insertProject($id, $name, $desc, $fullDesc, $age, $location, $diagnoses, $needs, $fullAmount, $currentAmount, $donatedAmount, $status, $link, $img) {
         $db = $this->sql;
         $uParams = array(0 => 'name', 1 => 'description', 2 => 'full_desc', 3 => 'age', 4 => 'location', 5 => 'diagnoses', 6 => 'needs', 7 => 'full_amount',
