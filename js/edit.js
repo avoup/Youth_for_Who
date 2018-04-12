@@ -13,16 +13,16 @@ $.fn.drawTable = function(n, startDate, endDate){
       var deleteURL = "loader.php?a=ProjectsController.Projects.deleteProject&project_id=";
       break;
     case "team_members":
-      var response = "";
+      var response = "response";
       var buttons = "<td><button class='btn btn-default getProject' data-toggle='modal' data-target='#edit-modal'><i class='fa fa-edit'></i></button></td>"
               + "<td><button class='btn btn-default deleteProj' data-toggle='confirmation' data-title='are you serious?'><i class='fa fa-close'></i></button></td>";
       var deleteURL = "loader.php?a=AdminController.Admin.deleteTeamMember&id=";
+      break;
     case "logs":
       formURL += "&start_date=" + startDate + "&end_date=" + endDate;
       var response = "",
           buttons = "";
   }
-
 // ================================================================== draw table
   $.ajax({
     url: formURL,
@@ -30,8 +30,8 @@ $.fn.drawTable = function(n, startDate, endDate){
     dataType: 'json',
     success:function(data, textStatus, jqXHR){
       if(data.success){
-        console.log(data);
         response = data[response] != undefined ? data[response] : data;
+        console.log(response);
         $.each(response, function(i, field){
           var optional = field.description || field.amount ,
               date;
@@ -86,7 +86,7 @@ $.fn.drawTable = function(n, startDate, endDate){
           $("#coverImgIdInput").val(result.response.cover_img_id);
           $("#mainImgIdInput").val(result.response.main_imgs[0].attach_id);
           // $("#imgInput").val(result.response.files);
-          CKEDITOR.instances.editor1.setData(result.response.full_desc);
+          CKEDITOR.instances.editor1.setData(result.response.description);
         });
       });
     };

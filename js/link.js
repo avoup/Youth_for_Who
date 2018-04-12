@@ -144,24 +144,24 @@ function getCauses(prop, pg) {
       url   : "loader.php?a=MenuController.Menu.getPageData",
       type  : 1,
       page  : ""
+    },
+    {
+      target:"#tTeam",
+      url   : "loader.php?a=AdminController.Admin.getTeamMembers",
+      type  : 0,
+      status: 3,
+      num   : 3,
+      page  : '',
+      html  : ["<div class='col-xs-6 col-sm-4'><div class='member'><div class='visual'><img src='",
+               "field['img']",
+               "' class='img-responsive' width='200'></div><div class='text'><h4>",
+               "field['name']",
+               "</h4><h6>",
+               "field['status']",
+               "</h6><p>",
+               "field['description']",
+               "</p></div></div></div>"]
     }
-    // {
-    //   target:"#tTeam",
-    //   url   : "loader.php?a=AdminController.Admin.getTeamMembers&num=3",
-    //   type  : 0,
-    //   status: 3,
-    //   num   : 3,
-    //   page  : 1,
-    //   html  : ["<div class='col-xs-6 col-sm-4'><div class='member'><div class='visual'><img src='",
-    //            "field['img']",
-    //            "' class='img-responsive' width='200'></div><div class='text'><h4>",
-    //            "field['name']",
-    //            "</h4><h6>",
-    //            "field['status']",
-    //            "</h6><p>",
-    //            "field['description']",
-    //            "</p></div></div></div>"]
-    // }
   ];
   $.each(props, function(i, field){
     getCauses(field, field.page);
